@@ -8,13 +8,6 @@ Afterwards `Render::html($image_id, $default_size, $media_sizes);`
 
 Or `Prophe1\Image\Render::html($image_id, $default_size, $media_sizes);`
 
-Exmaple of output:
-`<picture>
-  <source media="(max-width: 799px)" srcset="elva-480w-close-portrait.jpg">
-  <source media="(min-width: 800px)" srcset="elva-800w.jpg">
-  <img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
-</picture>`
-
 ## Parameter meaning
 <table>
 <tr>
