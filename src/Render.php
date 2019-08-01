@@ -75,10 +75,14 @@ final class Render
      * @return string|null
      */
     public static function html(
-        int $id,
+        int $id = null,
         ?string $default = null,
         ?array $sizes = null ): ?string
     {
+        if (!$id) {
+            return '';
+        }
+
         $image = new Image( $id, $default );
 
         if (! $image->getUrl()) {
