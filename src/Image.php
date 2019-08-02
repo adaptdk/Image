@@ -87,12 +87,12 @@ final class Image
      */
     public function svg(): string
     {
-        $file = file_get_contents(get_attached_file($this->getID()));
-        if (!$file) {
+        $file = get_attached_file($this->getID());
+        if (!file_exists($file)) {
             return '';
         }
 
-        return trim($file);
+        return trim(file_get_contents($file));
     }
 
     /**
