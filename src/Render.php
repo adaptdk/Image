@@ -34,7 +34,8 @@ final class Render
                 $url = $image->getUrl();
             }
 
-            $sources .= sprintf('<source srcset="%1$s" media="%2$s">',
+            $sources .= sprintf(
+                '<source srcset="%1$s" media="%2$s">',
                 $url,
                 $media
             );
@@ -66,42 +67,48 @@ final class Render
     /**
      * Outputs image html with sources
      *
-     * @since 0.0.1
-     *
-     * @param int $id
-     * @param string|null $default
-     * @param array|null $sizes
-     *
+     * @param  int|null  $id
+     * @param  string|null  $default
+     * @param  array|null  $sizes
+     * @param  array|null  $classes
+     * @param  array|null  $data_attributes
      * @return string|null
+     * @since 0.0.1
      */
     public static function html(
         int $id = null,
         ?string $default = null,
-        ?array $sizes = null ): ?string
-    {
+        ?array $sizes = null,
+        ?array $classes = null,
+        ?array $data_attributes = null
+    ): ?string {
         if (!$id) {
             return '';
         }
 
-        $image = new Image( $id, $default );
+        $image = new Image($id, $default);
 
-        if (! $image->getUrl()) {
+        if (!$image->getUrl()) {
             return null;
         }
 
-        if ($image->isSvg())
-        {
+        if ($image->isSvg()) {
             return $image->svg();
         }
 
-        return sprintf('
-            <picture>
-                %2$s
-                <img src="%1$s"%3$s>
-            </picture>',
+        $image_classes = $classes ? 'class="' . implode(' ', $classes) . '"' : '';
+
+        return sprintf(
+            '
+        <picture>
+            %2$s
+            <img src="%1$s"%3$s %4$s %5$s>
+        </picture>',
             $image->getUrl(),
             self::sources($image, $sizes),
-            self::attrs($image->getAttrs())
+            self::attrs($image->getAttrs()),
+            $image_classes,
+            implode(' ', $data_attributes)
         );
     }
 }
