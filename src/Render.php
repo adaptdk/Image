@@ -97,6 +97,7 @@ final class Render
         }
 
         $image_classes = $classes ? 'class="' . implode(' ', $classes) . '"' : '';
+        $image_data_attributes =  $data_attributes ? implode(' ', $data_attributes) : '';
 
         return sprintf(
             '
@@ -108,7 +109,7 @@ final class Render
             self::sources($image, $sizes),
             self::attrs($image->getAttrs()),
             $image_classes,
-            implode(' ', $data_attributes)
+            $image_data_attributes
         );
     }
 }
