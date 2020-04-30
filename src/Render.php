@@ -78,7 +78,7 @@ final class Render
     public static function html(
         int $id = null,
         ?string $default = null,
-        ?array $sizes = null,
+        ?array $sizes = [],
         ?array $classes = null,
         ?array $data_attributes = null
     ): ?string {
